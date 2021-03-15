@@ -1,7 +1,7 @@
-﻿@model IEnumerable<Soccer.Domain.League>
+﻿@model IEnumerable<Soccer.Domain.Team>
 
 @{
-    ViewBag.Title = "Ligas";
+    ViewBag.Title = "Equipos";
 }
 
 <link href="~/Content/DataTables/datatables.min.css" rel="stylesheet" />
@@ -9,11 +9,14 @@
 <h2>@ViewBag.Title</h2>
 
 <p>
-    @Html.ActionLink("Crear Liga", "Create", new { }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Crear Equipo", "Create", new { }, new { @class = "btn btn-primary" })
 </p>
-<table class="table table-responsive table-hover table-striped" id="MyTable">
+<table class="table table-hover table-responsive table-striped" id="MyTable">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.League.Name)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
@@ -21,14 +24,19 @@
                 @Html.DisplayNameFor(model => model.Logo)
             </th>
             <th>
-                Opciones
+                @Html.DisplayNameFor(model => model.Initials)
             </th>
+            <th></th>
         </tr>
     </thead>
+
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.League.Name)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
@@ -36,9 +44,12 @@
                     @Html.DisplayFor(modelItem => item.Logo)
                 </td>
                 <td>
-                    @Html.ActionLink("Editar", "Edit", new { id = item.LeagueId }, new { @class = "btn btn-warning" })
-                    @Html.ActionLink("Detalles", "Details", new { id = item.LeagueId }, new { @class = "btn btn-info" })
-                    @Html.ActionLink("Eliminar", "Delete", new { id = item.LeagueId }, new { @class = "btn btn-danger" })
+                    @Html.DisplayFor(modelItem => item.Initials)
+                </td>
+                <td>
+                    @Html.ActionLink("Editar", "Edit", new { id = item.TeamId }, new { @class = "btn btn-warning" })
+                    @Html.ActionLink("Detalles", "Details", new { id = item.TeamId }, new { @class = "btn btn-info" })
+                    @Html.ActionLink("Eliminar", "Delete", new { id = item.TeamId }, new { @class = "btn btn-danger" })
                 </td>
             </tr>
         }
@@ -92,4 +103,3 @@
         });
     </script>
 }
-
